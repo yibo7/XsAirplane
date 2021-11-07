@@ -4,17 +4,23 @@ import pygame
 from bullets.bullet_enmey import BulletEnmey
 from planes.plance_base import PlanceBase
 
+"""
+普通敌机
+"""
 
-class EnemyPlance(PlanceBase):
+
+class EnemyPlance(PlanceBase):  # 普通敌机机派生自PlanceBase，要重写PlanceBase相关的方法
     def __init__(self, sc):
         self.screen = sc
         self.move_type = self.random(0, 1)  # 敌机的活动方式 0为直线下
         self.bullet_index = self.random(0, 3)
         self.collide_count = 0
+        self.live = self.random(1, 3)
         super(EnemyPlance, self).__init__(sc)
 
     def get_default_image(self):
         imageIndex = self.random(0, 5)
+
         return imageIndex
 
     def get_size(self):
@@ -31,7 +37,7 @@ class EnemyPlance(PlanceBase):
         return paths
 
     def getLocation(self):
-        location = [self.random(20, self.screen.get_width()-60), -50]
+        location = [self.random(20, self.screen.get_width() - 60), -50]
         return location
 
     def creat_bluet(self):
@@ -69,7 +75,7 @@ class EnemyPlance(PlanceBase):
         self.kill()
 
     def collide(self):
-        self.collide_count +=1
-        if self.collide_count>self.random(0,3):
+        self.collide_count += 1
+        if self.collide_count > self.live:
             self.change_image(6)
             self.timer_run(0.1, self.change_model)

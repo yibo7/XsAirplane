@@ -1,8 +1,18 @@
 from SpriteBase import SpriteBase
 
+"""
+敌机子弹
+"""
+
 
 class BulletEnmey(SpriteBase):
     def __init__(self, plance, screen, _speed=None):
+        """
+        创建敌机子弹,注意：通过基类的change_image可以更换子弹造型
+        :param plance: 敌机（哪个敌机）
+        :param screen: 在哪个场景上绘制
+        :param _speed: 子弹的速度
+        """
         paths = []
         for i in range(9):
             paths.append(f"images/enemybullet/{i}.png")
